@@ -29,11 +29,32 @@ Pixabay API поддерживает пагинацию, пусть в отве�
   "webformatWidth": 640
 }
 
-Тебе интересны следующие свойства:
+/*//////////////////////////////////////////////////////////////////////////
+import axios from 'axios'
 
-webformatURL - ссылка на маленькое изображение для списка карточек
-largeImageURL - ссылка на большое изображение (смотри пункт 'дополнительно')
-likes - количество лайков
-views - количество просмотров
-comments - количество комментариев
-downloads - количество загрузок
+export default {
+  name: 'hello',
+  data: () => ({
+    hits: [],
+    errors: []
+  }),
+
+  created () {
+    axios.get('https://pixabay.com/api/?key=2980920-46f1aa264b036ffc6e45ebad0&orientation=vertical&q=robot&min_height=500https://pixabay.com/api/?key=2980920-46f1aa264b036ffc6e45ebad0&orientation=vertical&q=robot&min_height=500')
+    .then(responce => {
+      this.hits = responce.data
+      console.log(responce)
+    })
+    .catch(e => {
+      this.errors.push(e)
+    })
+  }
+}
+/////////////////////////////////////////////////////////////////
+
+import { searchImages } from 'pixabay-api';
+
+searchImages(api_key, 'kitty').then((r) => console.log(r));
+searchImages()
+
+/////////////////////////////////////////////////////////////////
