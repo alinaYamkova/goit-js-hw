@@ -1,28 +1,87 @@
-html {
-  box-sizing: border-box;
-}
-
 *,
 *::before,
 *::after {
   box-sizing: inherit;
+  padding: 0;
+  /* outline: 1px solid red; */
 }
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   color: #fff;
   background-color: #020115;
+  padding-left: 18px;
+  padding-right: 18px;
 }
+
+.picturesConteiner_js { 
+  display: flex;
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 20px;
+  max-width: 1200px;
+  /* flex-direction: row; */
+  justify-content: space-around;
+}
+
+img {
+  display: block;
+}
+
+.gallery {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0 auto;
+}
+
+.search-form > input {
+  width: 100%;
+  height: 35px;
+  background: rgb(217, 235, 255);
+}
+
+.photo-card {
+  display: flex;
+  padding: 15px 5px 5px;
+  height: 180px;
+}
+
 .stats-item {
-  display: inline-block;
-  padding: 5px;
-  max-width: 120px;
-  height: auto;
-  border: 3px groove #3e00ff52;;
-  /* border-style: groove; */
-  border-radius: 4px;
-  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
-    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+  height: 46px;
+  margin: 5px;
+  color: #3e00ff52;
+  border-bottom: 2px groove #3e00ff52;
+  cursor: pointer;
+  text-align: center;
+}
+
+.stats-item:hover {
+  color: rgba(255, 255, 255, 0.994);
+}
+
+.stats-item:hover>.material-icons {
+  color: inherit;
+}
+
+/* .stats-item:not(:first-child) {
+  margin-left: 2px;
+} */
+
+.stats{
+  display: flex;
+  /* padding-top: 6px;
+  padding-bottom: 8px; */
+  justify-content: center;
+}
+
+.material-icons {
+  display: flex;
+  justify-content: center;
+  color: #2200ff87;
+  min-width: 53px;
 }
 
 .btn {
@@ -32,10 +91,10 @@ body {
   margin-right: 3px;
   text-transform: uppercase;
   border: 0;
-  background-color: #3e9fee;
+  background-color: #078af562;
   color: #ffffff;
   padding: 10px 20px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
   border-radius: 4px;
 }

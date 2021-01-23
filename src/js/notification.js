@@ -1,13 +1,19 @@
 import '@pnotify/core/dist/PNotify.css'
 import '@pnotify/core/dist/BrightTheme.css';
 import '@pnotify/core/dist/Material.css';
-import { error } from '@pnotify/core';
+import { error, notice } from '@pnotify/core';
 import * as PNotifyMobile from '@pnotify/mobile/dist/PNotifyMobile.js';
 
 function errorMessage() {
   error({
-    text: "oops, something wrong"
+    text: "oops, something wrong!"
   });
 }
 
-export default {errorMessage};
+function noticeMessage() {
+  notice({
+    text: "please write a corect name of search!"
+  });
+}
+
+export default {errorMessage, noticeMessage};
