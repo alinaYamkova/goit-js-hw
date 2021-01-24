@@ -4,16 +4,16 @@ import '@pnotify/core/dist/Material.css';
 import { error, notice } from '@pnotify/core';
 import * as PNotifyMobile from '@pnotify/mobile/dist/PNotifyMobile.js';
 
-function errorMessage() {
-  error({
-    text: "oops, something wrong!"
-  });
-}
-
 function noticeMessage() {
   notice({
     text: "please write a corect name of search!"
   });
 }
 
-export default {errorMessage, noticeMessage};
+function errorMessage() {
+  error({
+    text: "oops, something wrong!"
+  });
+}
+
+export default {noticeMessage, errorMessage};

@@ -16,7 +16,7 @@ module.exports = (env) => ({
     contentBase: path.join(__dirname, "dist"),
     historyApiFallback: true,
     compress: true,
-    port: 4141,
+    port: 4040,
     noInfo: true,
     quiet: true,
     clientLogLevel: "warning",
