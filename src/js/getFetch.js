@@ -13,24 +13,19 @@ export default {
   },
   set queryValue(val) {
     return (this.query = val);
-  },
+  }, 
   
-  // async getFetch() {
-    //   // this.queryValue = val;
-    //   const URL = `${this.baseUrl}?image_type=photo&orientation=horizontal&q=${this.query}&page=${this.page}&per_page=${this.perPage}&key=${this.API_KEY}`;
-    //   const response = await fetch(URL);
-    //   const fetchResult = await response.json();
-    //   const imgs = await fetchResult.hits;
-    //   return imgs;
-    // },
-    
   getFetch(val) {
-    this.queryValue = val; 
-    const params = `?image_type=photo&orientation=horizontal&q=${val}&page=${this.page}&per_page=${this.perPage}&key=${this.API_KEY}`;
+    console.log('getFetch(val)', val);
+    // this.queryValue = val; 
+    if (val && val.length > 0) {
+      this.queryValue = val
+    } 
+    const params = `?image_type=photo&orientation=horizontal&q=${this.queryValue}&page=${this.page}&per_page=${this.perPage}&key=${this.API_KEY}`;
     const url = `${this.baseUrl}${params}`;
     return fetch(url)
-      .then((response) => response.json())
-      .then(({ hits }) => hits
+    .then((response) => response.json())
+    .then((response) => response
     );
   },
 
@@ -42,4 +37,18 @@ export default {
   resetPage() {
     return this.page = 1;
   },
+  setQuery(query) {
+    this.query = query;
+  }
 };  
+
+
+
+  // async getFetch() {
+    //   // this.queryValue = val;
+    //   const URL = `${this.baseUrl}?image_type=photo&orientation=horizontal&q=${this.query}&page=${this.page}&per_page=${this.perPage}&key=${this.API_KEY}`;
+    //   const response = await fetch(URL);
+    //   const fetchResult = await response.json();
+    //   const imgs = await fetchResult.hits;
+    //   return imgs;
+    // },

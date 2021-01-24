@@ -3,45 +3,51 @@ import notify from './notification';
 import fetchObject from './getFetch';
 import cardsTpl from '../template/card_image.hbs';
 const {form, input, gallery, loadMoreBtn} = refs;
-
+console.log(input);
 
 form.addEventListener('submit', onSearch);
-loadMoreBtn.addEventListener('click', onLoadMore);  
+loadMoreBtn.addEventListener('click', onLoadMore); 
+console.log('loadMoreBtn', loadMoreBtn); 
 
 function onSearch(event) {
   event.preventDefault();
   const inputValue = event.target.query.value;
+  console.log(typeof inputValue);
+  if(inputValue.length === 0) {
+    notify.noticeMessage(); 
+    console.log('no shit')
+    toClearSearch();
+    return;
+    // return false;
+  }
+  // fetchObject.queryValue = inputValue;
+  // fetchObject.setQuery(inputValue)
   fetchObject.getFetch(inputValue)
   .then(toMakeMarkup)
-  .catch(notify.errorMessage); 
+  .catch(
+    err => {
+      console.log(err)
+      notify.errorMessage
+    }); 
   toClearSearch();
-  input.value = "";
 };
 
 function toMakeMarkup (result) {
-  // if (result.length === 0) {
-  //   console.dir(result.length);
-  //   notify.noticeMessage(); 
-  //   toClearSearch();
-    // return;
-  // } toShowBtn();
-    const markup = cardsTpl(result);
-    gallery.insertAdjacentHTML('beforeend', markup);
-    return refs.gallery;
+  toShowBtn(result.total);
+  console.log(result);
+  const markup = cardsTpl(result.hits);
+  gallery.insertAdjacentHTML('beforeend', markup);
+  return gallery;
 };
 
-function onLoadMore() {
+function onLoadMore(event) {
+  event.preventDefault();
+  console.log();
   fetchObject.setPage();
-  fetchObject.getFetch(undefined)
-  .then(toMakeMarkup)
-  .catch(notify.errorMessage);
+  fetchObject.getFetch(undefined).then(toMakeMarkup);
   setTimeout(() => {
-    window.scrollTo({top: refs.gallery.scrollHeight, 
-      behavior: "smooth"});
+    window.scrollTo({top: gallery.scrollHeight, behavior: "smooth"});
   }, 1000);
-  //   window.scrollTo({
-    //     top: 1000,
-    //     behavior: "smooth"   // });
 };
 
 function toClearSearch() {
@@ -49,8 +55,10 @@ function toClearSearch() {
   gallery.innerHTML = '';
 };
 
-function toShowBtn() {
-  if (inputValue.length > fetchObject.perPage) {
+function toShowBtn(resultLength) {
+  if (resultLength > fetchObject.perPage) {
     loadMoreBtn.classList.remove('hidden');
-  } return; 
+  } else{
+    loadMoreBtn.classList.add('hidden');
+  }; 
 };
