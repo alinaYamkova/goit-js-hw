@@ -1,4 +1,3 @@
-// import { data } from 'autoprefixer';
 // import axios from 'axios';
 
 export default {
@@ -23,9 +22,7 @@ export default {
     } 
     const params = `?image_type=photo&orientation=horizontal&q=${this.queryValue}&page=${this.page}&per_page=${this.perPage}&key=${this.API_KEY}`;
     const url = `${this.baseUrl}${params}`;
-    return fetch(url)
-    .then((response) => response.json())
-    .then((response) => response
+    return fetch(url).then((res) => res.json()).then((response) => response
     );
   },
 
