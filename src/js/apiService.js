@@ -5,17 +5,15 @@ import cardsTpl from '../template/card_image.hbs';
 
 const {form, input, gallery, loadMoreBtn} = refs;
 
+
 form.addEventListener('submit', onSearch);
 loadMoreBtn.addEventListener('click', onLoadMore); 
 
 function onSearch(event) {
   event.preventDefault();
+  toHideBtn();
+  noticeErr();
   const inputValue = event.target.query.value;
-  if(inputValue.length === 0) {
-    notify.noticeMessage(); 
-    input.value = "";
-    return;
-  };
   fetchObject.getFetch(inputValue).then(toMakeMarkup).catch(notify.errorMessage); 
   toClearSearch();
 };
@@ -36,6 +34,13 @@ function onLoadMore(event) {
   }, 1000);
 };
 
+function noticeErr(event) {
+  if(input.value.length === 0) {
+    notify.noticeMessage(); 
+    event.target.query.value = "";
+  }
+}
+
 function toClearSearch() {
   input.value = "";
   gallery.innerHTML = '';
@@ -44,6 +49,9 @@ function toClearSearch() {
 function toShowBtn(resultLength) {
   if (resultLength > fetchObject.perPage) {
     loadMoreBtn.classList.remove('hidden');
-  }; 
-  loadMoreBtn.classList.add('hidden');
+  } return;
 };
+
+function toHideBtn() {
+  loadMoreBtn.classList.add('hidden');
+}
