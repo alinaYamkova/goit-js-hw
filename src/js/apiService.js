@@ -30,6 +30,7 @@ export default {
   // метод добавления стницы
   setPage() {
     return this.page += 1;
+    
   },
   // метод сброса страниц
   resetPage() {
