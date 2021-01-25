@@ -29,6 +29,7 @@ function toMakeMarkup (result) {
   }; 
   const markup = cardsTpl(result.hits);
   gallery.insertAdjacentHTML('beforeend', markup);
+  window.scrollTo({top: gallery.scrollHeight, behavior: "smooth"});
   toShowBtn(result.total);
   return gallery;
 };
@@ -36,14 +37,11 @@ function toMakeMarkup (result) {
 function onLoadMore(event) {
   event.preventDefault();
   fetchObject.setPage();
-  fetchObject.getFetch(undefined).then(toMakeMarkup);
-  setTimeout(() => {
-    window.scrollTo({top: gallery.scrollHeight, behavior: "smooth"});
-  }, 1000);
+  fetchObject.getFetch(null).then(toMakeMarkup);
 };
 
 function toShowBtn(resultLength) {
   if (resultLength > fetchObject.perPage) {
-    loadMoreBtn.classList.remove('hidden');
+    return loadMoreBtn.classList.remove('hidden');
   } return;
 };
