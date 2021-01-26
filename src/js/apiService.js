@@ -15,7 +15,7 @@ export default {
   }, 
   
   getFetch(val) {
-    console.log('getFetch(val)', val);
+    // console.log('getFetch(val)', val);
     // this.queryValue = val; 
     if (val && val.length > 0) {
       this.queryValue = val
@@ -30,15 +30,11 @@ export default {
   // метод добавления стницы
   setPage() {
     return this.page += 1;
-    
   },
   // метод сброса страниц
   resetPage() {
     return this.page = 1;
   },
-  setQuery(query) {
-    this.query = query;
-  }
 };  
 
 

@@ -1,6 +1,6 @@
 import refs from "./refs";
 import notify from './notification';
-import fetchObject from './apiService';
+import apiObject from './apiService';
 import cardsTpl from '../template/card_image.hbs';
 
 
@@ -17,7 +17,8 @@ function onSearch(event) {
     notify.noticeMessage();
     return;
   }; 
-  fetchObject.getFetch(inputValue).then(toMakeMarkup).catch(notify.errorMessage); 
+  apiObject.resetPage();
+  apiObject.getFetch(inputValue).then(toMakeMarkup).catch(notify.errorMessage); 
   input.value = "";
   gallery.innerHTML = '';
 };
@@ -35,8 +36,8 @@ function toMakeMarkup (result) {
 
 function onLoadMore(event) {
   event.preventDefault();
-  fetchObject.setPage();
-  fetchObject.getFetch(null).then(toMakeMarkup);
+  apiObject.setPage();
+  apiObject.getFetch(null).then(toMakeMarkup);
 };
 
 function toShowBtn(result) {
